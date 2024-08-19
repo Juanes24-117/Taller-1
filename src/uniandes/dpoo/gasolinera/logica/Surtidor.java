@@ -98,18 +98,18 @@ public class Surtidor
      * @param cantidadEntregada La cantidad de galones de gasolina que se le entregaron al cliente
      * @return El precio de la compra, redondeado al entero más cercano
      */
-    public int venderGasolina( String nombreTipoGasolina, double cantidadEntregada )
-    {
+    public int venderGasolina(String nombreTipoGasolina, double cantidadEntregada) {
         // Calcular el precio de la gasolina vendida y registrar que el empleado tiene esa cantidad de dinero
-        TipoGasolina tipo = tiposGasolina.get( nombreTipoGasolina );
-        int precio = ( int )Math.round( tipo.getPrecioPorGalon( ) * cantidadEntregada );
-        empleadoAsignado.agregarDinero( precio );
+        TipoGasolina tipo = tiposGasolina.get(nombreTipoGasolina);
+        int precio = (int) Math.round(tipo.getPrecioPorGalon() * cantidadEntregada);
+        empleadoAsignado.agregarDinero(precio);
 
         // Actualizar la cantidad de gasolina vendida en el surtidor
-        double cantidadAnterior = galonesVendidos.get( nombreTipoGasolina );
-        galonesVendidos.put( nombreTipoGasolina, cantidadAnterior - cantidadEntregada );
+        double cantidadAnterior = galonesVendidos.getOrDefault(nombreTipoGasolina, 0.0);
+        galonesVendidos.put(nombreTipoGasolina, cantidadAnterior + cantidadEntregada);
 
         return precio;
     }
+
 
 }
